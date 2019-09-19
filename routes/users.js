@@ -10,10 +10,9 @@ router.get('/', function(req, res, next) {
 router.post('/',(req,res)=>{
   const db =req.app.locals.db;
 // créer une valeur par défaut :
-
-  //db.collection('devcontact').insertOne(req.body,(err) => res.redirect('/'));
-  res.redirect('/');
   console.log(req.body);
+  db.collection('devcontact').insertOne(req.body,(err) => res.redirect('/'));
+
 });
 
 module.exports = router;
