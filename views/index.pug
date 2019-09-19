@@ -1,5 +1,20 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    h1= title
+    p Site internet de gesion de contact DEV2 #{title} #{info}
+
+    if contacts
+        ul
+            each contact in contacts
+                li='Nom du contact: ' + contact.firstname + ' / ' + contact.lastname + ' / ' + contact.phone + ' / ' + contact.mail + ' / ' + contact.info + ' / ' + contact.linkedin + ' / ' + contact.avatar
+
+    form(action='/users' method='POST' enctype='multipart/form-data')
+      input(type='text' name='firstname' placeholder='firstname')
+      input(type='text' name='lastname' placeholder='lastname')
+      input(type='text' name='phone' placeholder='phone')
+      input(type='text' name='email' placeholder='e-mail')
+      input(type='name' name='linkedin' placeholder='linkedin profile')
+      input(type='text-area' name='info' placeholder='info')
+      input(type='file' name='avatar' accept='image/*' placeholder='avatar')
+      input(type='submit')

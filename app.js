@@ -7,7 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+/*
+* Database
+* */
+const MongoClient = require('mongodb').MongoClient;
+
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,5 +44,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+MongoClient.connect('mongodb://localhost:27017',{ useNewUrlParser: true , useUnifiedTopology: true })
+    .then(client => {
+        app.locals.db=client.db('dev-contact');
+        app.listen(8000);
+    })
+    .catch(err => console.log(err));
 
 module.exports = app;
